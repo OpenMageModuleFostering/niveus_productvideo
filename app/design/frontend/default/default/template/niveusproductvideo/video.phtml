@@ -18,25 +18,52 @@
 <?php 
   $_productVideos = $this->_getProductVideos();
   $a=0;
+  $showThumbnail = false;
 
+  if($_productVideos && $_productVideos->count() > 1){
+    $showThumbnail = true;
+  }
 ?>
 <?php if($_productVideos && $_productVideos->count() > 0):?>
    <h3><?php echo $this->__('Product Videos') ?></h3>
 
-
-
-   <?php foreach($_productVideos as $video) : ?>  
-        <?php $videourl = $this->getCode($video);?>
+   <table>
+     <tr>
+       <td>
         
-        <?php if($this->is_youtube($videourl)):?>
-        	 <!-- video from youtube -->
-        	 <?php $video_code = $this->youtube_video_id($videourl);?>
-             <?php echo "<iframe width=\"560\" height=\"315\" src=\"http://www.youtube.com/embed/$video_code?rel=0\" frameborder=\"0\"></iframe>";?>
-        <?php elseif($this->is_vimeo($videourl)):?> 
-             <?php $video_code = $this->vimeo_video_id($videourl);?> 
-             <?php echo "<iframe src=\"http://player.vimeo.com/video/$video_code?title=0&byline=0&portrait=0;loop=0\" width=\"560\" height=\"315\" frameborder=\"0\"></iframe>"; ?>        
-        <?php endif; ?>
-                      
-   <?php endforeach; ?>
+<?php foreach($_productVideos as $video) : ?>
+    <?php 
+         $videourl = $this->getCode($video);
+         
+         if($this->is_youtube($videourl)){
+          $video_code = $this->youtube_video_id($videourl);
+          $final_video_url = "http://www.youtube.com/embed/$video_code?rel=0";
+          $final_thumnail_url = "http://img.youtube.com/vi/$video_code/default.jpg"; 
+         }
+         elseif($this->is_vimeo($videourl)) {
+           $video_code = $this->vimeo_video_id($videourl);
+           $final_video_url = "http://player.vimeo.com/video/$video_code?title=0&byline=0&portrait=0;loop=0";
+           $hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$video_code.php"));
+           $final_thumnail_url = $hash[0]['thumbnail_medium'];  
+         }    
+    ?>
+     
+<?php 
+  if ($showThumbnail) {  
+    echo "<a href=$final_video_url target=\"productVideoFrame\"><img src=$final_thumnail_url height=\"100\" width=\"100\"></a>";
+  }  
+    ?>&nbsp;
+  
+<?php endforeach; ?>
+         </td>
+         <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+         <td>
+           <?php echo "<iframe name=\"productVideoFrame\" src=$final_video_url width=\"560\" height=\"340\" frameborder=\"0\"></iframe>";?>
+         </td>
+       </tr>
+</table>
 
+   
+
+           
 <?php endif;?>
