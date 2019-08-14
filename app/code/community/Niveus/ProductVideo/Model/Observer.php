@@ -20,21 +20,28 @@ class Niveus_ProductVideo_Model_Observer
         {
             $product = $observer->getProduct();
 
-            $videos = Mage::getModel('productvideo/videos')
-            ->getCollection()
- 	    ->addFieldToFilter('product_id', $product->getId())
-            ->addFieldToFilter('store_id', $product->getStoreId());
+            $video1 =  $this->_getRequest()->getPost('video1');
+            $video2 =  $this->_getRequest()->getPost('video2');
+            $video3 =  $this->_getRequest()->getPost('video3');
 
-            foreach ($videos as $video) 
+            if((!is_null($video1) || isset($video1)) && (!is_null($video2) || isset($video2)) && (!is_null($video3) || isset($video3)))
             {
-                 $video->delete();
-            }
+               $videos = Mage::getModel('productvideo/videos')
+                 ->getCollection()
+ 	         ->addFieldToFilter('product_id', $product->getId())
+                 ->addFieldToFilter('store_id', $product->getStoreId());
 
+               foreach ($videos as $video) 
+               {
+                  $video->delete();
+               }
+            }
 
              // Video 1
  
-             $video1 =  $this->_getRequest()->getPost('video1');
+
              $model = Mage::getModel('productvideo/videos');
+
 
              try
              {
@@ -56,7 +63,7 @@ class Niveus_ProductVideo_Model_Observer
 
              // Video 2
 
-             $video2 =  $this->_getRequest()->getPost('video2');
+
              $model = Mage::getModel('productvideo/videos');
              try
              {
@@ -76,7 +83,7 @@ class Niveus_ProductVideo_Model_Observer
               
              // Video 3
 
-             $video3 =  $this->_getRequest()->getPost('video3');
+
              $model = Mage::getModel('productvideo/videos');
              try
              {
