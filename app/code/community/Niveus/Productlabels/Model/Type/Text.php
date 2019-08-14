@@ -1,0 +1,10 @@
+<?php
+class Niveus_Productlabels_Model_Type_Text extends Mage_Core_Model_Abstract
+{
+    public function _construct()
+    {
+        parent::_construct();
+        $this->_init('productlabels/type_text');
+    }
+  
+}

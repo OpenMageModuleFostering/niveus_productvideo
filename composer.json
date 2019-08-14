@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/Niveus_ProductVideo",
+    "type": "magento-module",
+    "license": "OSL-v3.0",
+    "homepage": "",
+    "description": "Niveus Youtube product Video extension",
+    "authors": [
+    {
+        "name": "Niveus Solutions",
+        "email": "support@niveussolutions.com"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}
