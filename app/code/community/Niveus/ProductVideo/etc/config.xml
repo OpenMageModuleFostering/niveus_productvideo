@@ -3,7 +3,7 @@
 <config>
     <modules>
         <Niveus_ProductVideo>
-            <version>1.1.0</version>
+            <version>1.2.0</version>
         </Niveus_ProductVideo>
     </modules>
 
@@ -24,7 +24,7 @@
     	</models>
     	
         <resources>
-            <productvideo_setup>
+            <niveus_productvideo_setup>
              	<setup>
                     <module>Niveus_ProductVideo</module>
 		    <class>Niveus_ProductVideo_Model_Resource_Eav_Mysql4_Setup</class>
@@ -32,17 +32,17 @@
                 <connection>
                     <use>core_setup</use>
                 </connection>
-            </productvideo_setup>
-            <productvideo_write>
+            </niveus_productvideo_setup>
+            <niveus_productvideo_write>
                 <connection>
                     <use>core_write</use>
                 </connection>
-            </productvideo_write>
-            <productvideo_read>
+            </niveus_productvideo_write>
+            <niveus_productvideo_read>
                 <connection>
                     <use>core_read</use>
                 </connection>
-            </productvideo_read>
+            </niveus_productvideo_read>
         </resources>
         
         <helpers>
