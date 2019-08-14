@@ -58,5 +58,58 @@ class Niveus_ProductVideo_Block_Video extends Mage_Catalog_Block_Product_View_Ab
  	    ->addFieldToFilter('product_id', $this->getProduct()->getId())
             ->addFieldToFilter('store_id', $storeId);
     }
+    
+    
+    /**
+     * This function checks the url is utube
+     * @param type $url
+     * @return type
+     */
+    function is_youtube($url)
+    {
+    	return (preg_match('/youtu\.be/i', $url) || preg_match('/youtube\.com\/watch/i', $url));
+    }
+    
+    /**
+     * This function checks url has vimeo
+     * @param type $url
+     * @return type
+     */
+    function is_vimeo($url)
+    {
+    	return (preg_match('/vimeo\.com/i', $url));
+    }
+    
+    /**
+     * This function get the youtube id.
+     * @param type $url
+     * @return string
+     */
+    function youtube_video_id($url)
+    {
+    	$pattern = '/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/';
+    	preg_match($pattern, $url, $matches);
+    	if (count($matches) && strlen($matches[7]) == 11)
+    	{
+    		return $matches[7];
+    	}
+    }
+    
+    /**
+     * This function get the vimeo id
+     * @param type $url
+     * @return string
+     */
+    function vimeo_video_id($url)
+    {
+    	$pattern = '/\/\/(www\.)?vimeo.com\/(\d+)($|\/)/';
+   		preg_match($pattern, $url, $matches);
+   		if (count($matches))
+   		{
+   			return $matches[2];
+    	}
+    	
+    	return '';
+    }
 
 }

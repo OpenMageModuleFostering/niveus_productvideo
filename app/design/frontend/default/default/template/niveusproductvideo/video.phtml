@@ -26,12 +26,17 @@
 
 
    <?php foreach($_productVideos as $video) : ?>  
-        <?php $video = $this->getCode($video);?>
-        <?php $video_code=substr($video,-11,11); ?>
-        <?php if($video_code !=''):?>
+        <?php $videourl = $this->getCode($video);?>
+        
+        <?php if($this->is_youtube($videourl)):?>
+        	 <!-- video from youtube -->
+        	 <?php $video_code = $this->youtube_video_id($videourl);?>
              <?php echo "<iframe width=\"560\" height=\"315\" src=\"http://www.youtube.com/embed/$video_code?rel=0\" frameborder=\"0\"></iframe>";?>
-              <!-- video from youtube -->
-        <?php endif;?>               
+        <?php elseif($this->is_vimeo($videourl)):?> 
+             <?php $video_code = $this->vimeo_video_id($videourl);?> 
+             <?php echo "<iframe src=\"http://player.vimeo.com/video/$video_code?title=0&byline=0&portrait=0;loop=0\" width=\"560\" height=\"315\" frameborder=\"0\"></iframe>"; ?>        
+        <?php endif; ?>
+                      
    <?php endforeach; ?>
 
 <?php endif;?>
