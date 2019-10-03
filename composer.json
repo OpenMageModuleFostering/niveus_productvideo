@@ -1,7 +1,7 @@
 {
-    "name": "OpenMageModuleFostering\/Niveus_ProductVideo",
+    "name": "openmage-module-fostering\/niveus_productvideo",
     "type": "magento-module",
-    "license": "OSL-v3.0",
+    "license": "OSL-3.0",
     "homepage": "",
     "description": "Niveus Youtube product Video extension",
     "authors": [
